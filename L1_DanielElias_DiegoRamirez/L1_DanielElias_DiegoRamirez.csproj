@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="LibreriaDeClases">
+      <HintPath>..\..\LibreriaDeClases\LibreriaDeClases\obj\Debug\netcoreapp3.1\LibreriaDeClases.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
