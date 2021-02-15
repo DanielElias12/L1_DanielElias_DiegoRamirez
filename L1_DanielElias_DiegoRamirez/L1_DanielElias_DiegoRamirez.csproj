@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Libreria_Lab\Libreria_Lab.vbproj" />
+    <ProjectReference Include="..\LIbreriaRD\LIbreriaRD.csproj" />
   </ItemGroup>
 
   <ItemGroup>
