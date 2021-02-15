@@ -50,7 +50,7 @@ namespace L1_DanielElias_DiegoRamirez
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Player}/{action=Index}/{id?}");
             });
         }
     }

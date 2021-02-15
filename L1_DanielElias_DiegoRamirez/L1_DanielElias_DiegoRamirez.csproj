@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Libreria_Lab\Libreria_Lab.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="LibreriaDeClases">
       <HintPath>..\..\LibreriaDeClases\LibreriaDeClases\obj\Debug\netcoreapp3.1\LibreriaDeClases.dll</HintPath>
     </Reference>
