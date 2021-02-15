@@ -2,7 +2,7 @@
 
 namespace LIbreriaRD
 {
-    public class Class1
+    public class Globalmethods
     {
     }
 }

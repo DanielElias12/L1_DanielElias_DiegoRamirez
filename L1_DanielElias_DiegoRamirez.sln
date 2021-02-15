@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L1_DanielElias_DiegoRamirez", "L1_DanielElias_DiegoRamirez\L1_DanielElias_DiegoRamirez.csproj", "{DD52C786-6841-461E-BA27-AC1C435CF799}"
 EndProject
-Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Libreria_Lab", "Libreria_Lab\Libreria_Lab.vbproj", "{C9F39718-5038-45EF-8960-049E132ECE2C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIbreriaRD", "LIbreriaRD\LIbreriaRD.csproj", "{35FA26DC-61A0-48A7-B506-79AD10D46DA9}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{DD52C786-6841-461E-BA27-AC1C435CF799}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD52C786-6841-461E-BA27-AC1C435CF799}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD52C786-6841-461E-BA27-AC1C435CF799}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9F39718-5038-45EF-8960-049E132ECE2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9F39718-5038-45EF-8960-049E132ECE2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9F39718-5038-45EF-8960-049E132ECE2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9F39718-5038-45EF-8960-049E132ECE2C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{35FA26DC-61A0-48A7-B506-79AD10D46DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{35FA26DC-61A0-48A7-B506-79AD10D46DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35FA26DC-61A0-48A7-B506-79AD10D46DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
