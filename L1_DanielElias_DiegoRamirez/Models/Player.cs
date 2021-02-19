@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-
+using System.Collections;
 namespace L1_DanielElias_DiegoRamirez.Models
 {
     public class Player
@@ -26,6 +26,9 @@ namespace L1_DanielElias_DiegoRamirez.Models
         [Required]
         public string Club { get; set; }
 
-
+        public static explicit operator Player(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
