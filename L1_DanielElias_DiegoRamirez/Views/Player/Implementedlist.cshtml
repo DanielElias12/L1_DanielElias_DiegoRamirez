@@ -9,6 +9,20 @@
 <p>
     <a asp-action="ImplementedListManualCreate">Create New</a>
 </p>
+
+
+
+
+
+
+<form method="get" asp-action="Implementedlist">
+    <p>
+        <input type="search" placeholder="Type name, last name, salary, or club..." value="@ViewData["GetPlayerImplemented"]" name="searched" style="width:500px;" />
+        <input type="submit" value="Search" class="btn btn-outline-primary" />
+        <a asp-action="Implementedlist">Show All</a>
+    </p>Get
+
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -55,9 +69,8 @@
                 @Html.DisplayFor(modelItem => item.Club)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            
             </td>
         </tr>
 }
