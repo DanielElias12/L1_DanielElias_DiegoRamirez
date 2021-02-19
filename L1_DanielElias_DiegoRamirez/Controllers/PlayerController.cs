@@ -1,16 +1,21 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
+using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using L1_DanielElias_DiegoRamirez.Models.Data;
+using LIbreriaRD;
 
-
+using L1_DanielElias_DiegoRamirez.Models;
 namespace L1_DanielElias_DiegoRamirez.Controllers
 {
     public class PlayerController : Controller
     {
+
+       
+
         // GET: PlayerController
         public ActionResult Index()
         {
@@ -28,7 +33,10 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
         {
             return View();
         }
-
+        public ActionResult ImplementedListManualCreate()
+        {
+            return View();
+        }
         //.NET LIST
         public ActionResult dotnetList()
         {
@@ -36,12 +44,21 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
             return View(Singleton.Instance.PlayersList);
 
         }
+        public ActionResult Implementedlist()
+        {
+
+
+            return View(Singleton.Instance.playeradder);
+
+        }
+
 
         // POST: PlayerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult dotnetManualCreate(IFormCollection collection)
         {
+
             try
             {
                 var newPlayer = new Models.Player
@@ -54,13 +71,45 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
                     Club = collection["Club"]
 
                 };
+              
+
                 Singleton.Instance.PlayersList.Add(newPlayer);
                 return RedirectToAction(nameof(dotnetList));
+
             }
             catch
             {
                 return View();
             }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ImplementedListManualCreate(IFormCollection collection)
+        {
+
+            try
+            {
+                var newPlayer = new Models.Player
+                {
+                    Id = Convert.ToInt32(collection["Id"]),
+                    Name = collection["Name"],
+                    LastName = collection["LastName"],
+                    Position = collection["Position"],
+                    Salary = Convert.ToDouble(collection["Salary"]),
+                    Club = collection["Club"]
+
+                };
+
+                Singleton.Instance.playeradder.AddLast(newPlayer);
+         
+                return RedirectToAction(nameof(Implementedlist));
+
+            }
+            catch
+            {
+                return View();
+            }
+
         }
 
         public ActionResult dotnetEdit(int id)
