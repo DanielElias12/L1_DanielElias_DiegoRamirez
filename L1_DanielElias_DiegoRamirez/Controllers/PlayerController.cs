@@ -21,6 +21,10 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
     public class PlayerController : Controller
     {
 
+        public static string log;
+
+        Stopwatch stopwatch = new Stopwatch();
+        
 
 
 
@@ -48,6 +52,8 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
        [HttpPost]
         public IActionResult ReadFile(FileClass model)
         {
+            stopwatch.Restart();
+            stopwatch.Start();
             if (ModelState.IsValid)
             {
                 string uFileName = null;
@@ -79,7 +85,10 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
                 }
 
             }
+            stopwatch.Stop();
+            log += "Time elpased on reading csv: " + stopwatch.Elapsed.TotalMilliseconds.ToString()+"\n";
             return RedirectToAction("dotnetList");
+            
         }
 
      
@@ -94,7 +103,8 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult dotnetManualCreate(IFormCollection collection)
         {
-
+            stopwatch.Restart();
+            stopwatch.Start();
             try
             {
                 var newPlayer = new Models.Player
@@ -110,6 +120,8 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
 
 
                 Singleton.Instance.PlayersList.Add(newPlayer);
+                stopwatch.Stop();
+                log += "Time elpased on adding new player : " + stopwatch.Elapsed.TotalMilliseconds.ToString() + "\n";
                 return RedirectToAction(nameof(dotnetList));
 
             }
@@ -117,6 +129,7 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
             {
                 return View();
             }
+           
         }
 
 
@@ -124,13 +137,18 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
         [HttpGet]
         public ActionResult dotnetList(string searched)
         {
+            
             ViewData["GetPlayer"] = searched;
             var playerRequest = from x in Singleton.Instance.PlayersList select x;
             if (!String.IsNullOrEmpty(searched))
             {
+                stopwatch.Restart();
+                stopwatch.Start();
                 //DELEGATES
                 playerRequest = playerRequest.Where(x => x.Name.Contains(searched) || x.LastName.Contains(searched) ||
                 x.Position.Contains(searched) || x.Salary.ToString().Contains(searched) || x.Club.Contains(searched));
+                stopwatch.Stop();
+                log += "Time elpased on searching: " + stopwatch.Elapsed.TotalMilliseconds.ToString() + "\n";
             }
             return View(playerRequest);
         }
@@ -140,9 +158,13 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
             var playerRequest = from x in Singleton.Instance.playeradder select x;
             if (!String.IsNullOrEmpty(searched))
             {
+                stopwatch.Restart();
+                stopwatch.Start();
                 //DELEGATES
                 playerRequest = playerRequest.Where(x => x.Name.Contains(searched) || x.LastName.Contains(searched) ||
                 x.Position.Contains(searched) || x.Salary.ToString().Contains(searched) || x.Club.Contains(searched));
+                stopwatch.Stop();
+                log += "Time elpased on searching on implemented list: " + stopwatch.Elapsed.TotalMilliseconds.ToString() + "\n";
             }
             return View(playerRequest);
         }
@@ -159,6 +181,8 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
 
             try
             {
+                stopwatch.Restart();
+                stopwatch.Start();
                 var newPlayer = new Models.Player
                 {
                     Id = Convert.ToInt32(collection["Id"]),
@@ -171,7 +195,8 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
                 };
 
                 Singleton.Instance.playeradder.AddLast(newPlayer);
-         
+                stopwatch.Stop();
+                log += "Time elpased on adding player into the implemented list: " + stopwatch.Elapsed.TotalMilliseconds.ToString() + "\n";
                 return RedirectToAction(nameof(Implementedlist));
 
             }
@@ -195,12 +220,16 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult dotnetEdit(int id, IFormCollection collection)
         {
+            stopwatch.Restart();
+            stopwatch.Start();
             try
             {
                 var editPlayer = Singleton.Instance.PlayersList.Find(x => x.Id == id);
                 editPlayer.Salary = Convert.ToDouble(collection["Salary"]);
                 editPlayer.Club = collection["Club"];
                 Singleton.Instance.PlayersList[id-1] = editPlayer;
+                stopwatch.Stop();
+                log += "Time elpased on editing player data: " + stopwatch.Elapsed.TotalMilliseconds.ToString() + "\n";
                 return RedirectToAction(nameof(dotnetList));
             }
             catch
@@ -209,9 +238,15 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
             }
         }
 
-       
 
-    
+        public ActionResult GetLog()
+        {
+
+
+            return File(Encoding.UTF8.GetBytes(log),"text/csv", "Log.txt");
+            
+        }
+
 
 
 
