@@ -1,27 +1,20 @@
 ﻿@model IEnumerable<L1_DanielElias_DiegoRamirez.Models.Player>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Implementedlist";
 }
 
-<h1>MLS Menu</h1>
+<h1>Implementedlist</h1>
 
 <p>
-    <a asp-action="dotnetList">Players List (.NET)</a>
-
+    <a asp-action="ImplementedListManualCreate">Create New</a>
 </p>
-<p>
-    <a asp-action="Implementedlist">Players List(Implement)</a>
-
-</p>
-<p>
-    <a asp-action="ImplementedlistManualCreate"> create Players List(Implement)</a>
-
-</p>
-
-@*<table class="table">
+<table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -43,6 +36,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -66,4 +62,4 @@
         </tr>
 }
     </tbody>
-</table>*@
+</table>
