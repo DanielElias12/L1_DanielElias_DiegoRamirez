@@ -9,8 +9,14 @@
 <p>
     <a asp-action="dotnetManualCreate">Create New (Manual)</a>
 </p>
+
 <p>
     <a asp-action="Index">Menu</a>
+
+
+<p>
+    <a asp-action="ReadFile">Import .csv file with players</a>
+
 </p>
 <table class="table">
     <thead>
@@ -58,7 +64,7 @@
                 @Html.DisplayFor(modelItem => item.Club)
             </td>
             <td>
-                @Html.ActionLink("Edit player", "dotnetEdit", new { id = item.Salary  }) 
+                @Html.ActionLink("Edit player", "dotnetEdit", new { id = item.Id  }) 
              
             </td>
         </tr>
