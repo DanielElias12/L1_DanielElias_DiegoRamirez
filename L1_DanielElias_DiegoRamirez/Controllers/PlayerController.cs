@@ -36,6 +36,8 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
         {
             return View(Singleton.Instance.PlayersList);
         }
+
+        //READ FILE METHOD FOR .NET LIST
         public ActionResult ReadFile()
         {
          
@@ -80,44 +82,13 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
             return RedirectToAction("dotnetList");
         }
 
-        //POST READ FILE
-        //[HttpPost]
-        //public ActionResult ReadFile()
-        //{
-        //    return View();
-        //}
-
-        // GET: PlayerController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
+     
+        //MANUAL CREATE METHOD FOR .NET LIST
         // GET: PlayerController/Create
         public ActionResult dotnetManualCreate()
         {
             return View();
         }
-        public ActionResult ImplementedListManualCreate()
-        {
-            return View();
-        }
-        //.NET LIST
-        public ActionResult dotnetList()
-        {
-
-            return View(Singleton.Instance.PlayersList);
-
-        }
-        public ActionResult Implementedlist()
-        {
-
-
-            return View(Singleton.Instance.playeradder);
-
-        }
-
-
         // POST: PlayerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -136,7 +107,7 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
                     Club = collection["Club"]
 
                 };
-              
+
 
                 Singleton.Instance.PlayersList.Add(newPlayer);
                 return RedirectToAction(nameof(dotnetList));
@@ -146,6 +117,40 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
             {
                 return View();
             }
+        }
+
+
+        //.NET LIST
+        [HttpGet]
+        public ActionResult dotnetList(string searched)
+        {
+            ViewData["GetPlayer"] = searched;
+            var playerRequest = from x in Singleton.Instance.PlayersList select x;
+            if (!String.IsNullOrEmpty(searched))
+            {
+                //DELEGATES
+                playerRequest = playerRequest.Where(x => x.Name.Contains(searched) || x.LastName.Contains(searched) ||
+                x.Position.Contains(searched) || x.Salary.ToString().Contains(searched) || x.Club.Contains(searched));
+            }
+            return View(playerRequest);
+        }
+        public ActionResult Implementedlist(string searched)
+        {
+            ViewData["GetPlayerImplemented"] = searched;
+            var playerRequest = from x in Singleton.Instance.playeradder select x;
+            if (!String.IsNullOrEmpty(searched))
+            {
+                //DELEGATES
+                playerRequest = playerRequest.Where(x => x.Name.Contains(searched) || x.LastName.Contains(searched) ||
+                x.Position.Contains(searched) || x.Salary.ToString().Contains(searched) || x.Club.Contains(searched));
+            }
+            return View(playerRequest);
+        }
+
+        //IMPLEMENTED LIST CREATE METHOD
+        public ActionResult ImplementedListManualCreate()
+        {
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -177,6 +182,8 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
 
         }
 
+
+        //EDIT METHODS FOR .NET LIST
         public ActionResult dotnetEdit(int id)
         {
 
@@ -186,15 +193,14 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult dotnetEdit( int id, IFormCollection collection)
+        public ActionResult dotnetEdit(int id, IFormCollection collection)
         {
             try
             {
                 var editPlayer = Singleton.Instance.PlayersList.Find(x => x.Id == id);
-             
                 editPlayer.Salary = Convert.ToDouble(collection["Salary"]);
                 editPlayer.Club = collection["Club"];
-                Singleton.Instance.PlayersList[id] = editPlayer;
+                Singleton.Instance.PlayersList[id-1] = editPlayer;
                 return RedirectToAction(nameof(dotnetList));
             }
             catch
@@ -203,46 +209,12 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
             }
         }
 
-        // GET: PlayerController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+       
 
-        // POST: PlayerController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+    
 
-        // GET: PlayerController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: PlayerController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+
+
     }
 }
