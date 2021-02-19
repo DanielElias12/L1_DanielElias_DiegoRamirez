@@ -8,6 +8,7 @@ using System.Web;
 using L1_DanielElias_DiegoRamirez.Models.Data;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using System.Diagnostics;
 
 namespace L1_DanielElias_DiegoRamirez.Controllers
 {
@@ -17,6 +18,7 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
         public PlayerController(IWebHostEnvironment hostingEnvironment)
         {
             this.hostingEnvironment = hostingEnvironment;
+            
         }
 
         // GET: PlayerController
@@ -124,17 +126,21 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
         public ActionResult dotnetEdit(int id)
         {
 
-            //var editPlayer = Singleton.Instance.PlayersList.Find(x => x.Id == id);
-            return View();
+            var editPlayer = Singleton.Instance.PlayersList.Find(x => x.Id == id);
+            return View(editPlayer);
 
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult dotnetEdit(int id, IFormCollection collection)
+        public ActionResult dotnetEdit( int id, IFormCollection collection)
         {
             try
             {
                 var editPlayer = Singleton.Instance.PlayersList.Find(x => x.Id == id);
+             
+                editPlayer.Salary = Convert.ToDouble(collection["Salary"]);
+                editPlayer.Club = collection["Club"];
+                Singleton.Instance.PlayersList[id] = editPlayer;
                 return RedirectToAction(nameof(dotnetList));
             }
             catch
