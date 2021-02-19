@@ -20,7 +20,7 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
 {
     public class PlayerController : Controller
     {
-
+        public Node<Player> p;
 
 
 
@@ -39,6 +39,11 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
         public ActionResult ReadFile()
         {
          
+            return View();
+        }
+
+        public ActionResult ImplementedReadfile()
+        {
             return View();
         }
 
@@ -78,6 +83,42 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
 
             }
             return RedirectToAction("dotnetList");
+        }
+        [HttpPost]
+        public IActionResult ImplementedReadfile(FileClass model)
+        {
+            if (ModelState.IsValid)
+            {
+                string uFileName = null;
+                if (model.csv != null)
+                {
+                    string uploadFolder = Path.Combine(this.hostingEnvironment.WebRootPath, "CSV");
+                    uFileName = Guid.NewGuid().ToString() + model.csv.FileName;
+                    string filePath = Path.Combine(uploadFolder, uFileName);
+
+                    using (FileStream fileStream = System.IO.File.Create(filePath))
+                    {
+                        model.csv.CopyTo(fileStream);
+                        fileStream.Flush();
+                    }
+                    string[] lines = System.IO.File.ReadAllLines(filePath);
+
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        string[] fields = lines[i].Split(",");
+                        var newPlayer = new Models.Player();
+                        newPlayer.Id = Convert.ToInt32(fields[0]);
+                        newPlayer.Name = fields[1];
+                        newPlayer.LastName = fields[2];
+                        newPlayer.Position = fields[3];
+                        newPlayer.Salary = Convert.ToDouble(fields[4]);
+                        newPlayer.Club = fields[5];
+                        Singleton.Instance.playeradder.AddLast(newPlayer);
+                    }
+                }
+
+            }
+            return RedirectToAction("Implementedlist");
         }
 
         //POST READ FILE
@@ -184,6 +225,14 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
             return View(editPlayer);
 
         }
+        public ActionResult Implementededit(int  i)
+        {
+                      var playerRequest = Singleton.Instance.playeradder.peekatposition(i);
+
+            return View(playerRequest);
+
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult dotnetEdit( int id, IFormCollection collection)
@@ -203,6 +252,11 @@ namespace L1_DanielElias_DiegoRamirez.Controllers
             }
         }
 
+        //public ActionResult Implementededit(int id)
+        //{
+      
+
+        //}
         // GET: PlayerController/Edit/5
         public ActionResult Edit(int id)
         {
