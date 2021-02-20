@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L1_DanielElias_DiegoRamirez", "L1_DanielElias_DiegoRamirez\L1_DanielElias_DiegoRamirez.csproj", "{DD52C786-6841-461E-BA27-AC1C435CF799}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIbreriaRD", "LIbreriaRD\LIbreriaRD.csproj", "{35FA26DC-61A0-48A7-B506-79AD10D46DA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LIbreriaRD", "LIbreriaRD\LIbreriaRD.csproj", "{35FA26DC-61A0-48A7-B506-79AD10D46DA9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5154D06-73AE-428E-B5B5-72566AC10882}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

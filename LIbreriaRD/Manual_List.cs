@@ -10,7 +10,8 @@ namespace LIbreriaRD
     {
         private Node<T> head;
         private Node<T> tail;
-
+        private Node<T> current;
+        private Node<T> pretemp;
         public int Length { get; private set; }
 
         public Manual_List()
@@ -56,8 +57,41 @@ namespace LIbreriaRD
                 }
             }
         }
+         public bool Remove (int pos)
+        {
+            int XD = 0;
+            current = head;
+            while(current != null)
+            {
+                if  (XD == pos)
+                {
+                    if (this.current.Next == null)
+                    {
+                        tail = this.current.Previous;
+                    }
+                    else
+                    {
+                        this.current.Next.Previous = this.current.Previous;
+                    }
+                    if (this.current.Previous == null)
+                    {
+                        head = this.current.Next;
+                    }
+                    else
+                    {
+                        this.current.Previous.Next = current.Next;
+                    }
+                    current = null;
+                        this.Length--;
+                    return true;
+                }
+                current = this.current.Next;
+                XD++;
+            }
+            return false;
+        }
+       
 
-      
 
         public override string ToString()
         {

@@ -22,4 +22,8 @@
     <Folder Include="wwwroot\CSV\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
 </Project>

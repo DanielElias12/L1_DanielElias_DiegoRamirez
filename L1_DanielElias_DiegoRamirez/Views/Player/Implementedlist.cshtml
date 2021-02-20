@@ -9,7 +9,12 @@
 <p>
     <a asp-action="ImplementedListManualCreate">Create New</a>
 </p>
-
+<p>
+    <a asp-action="Implementedreadfile">Import .csv file with players</a>
+</p>
+<p>
+    <a asp-action="Index">menu </a>
+</p>
 
 
 
@@ -48,31 +53,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Position)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Club)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Club)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit player", "Implementededit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete player", "Implementeddelete", new { id = item.Id }) 
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
