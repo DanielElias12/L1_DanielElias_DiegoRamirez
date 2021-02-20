@@ -10,15 +10,41 @@ namespace LIbreriaRD
     {
         private Node<T> head;
         private Node<T> tail;
-
+        private Node<T> current;
+       
         public int Length { get; private set; }
 
         public Manual_List()
         {
             this.head = this.tail = null;
+      
             this.Length = 0;
         }
 
+        public T PeekFirst()
+        {
+            if (this.head == null)
+            {
+                throw new Exception("No items in the linked list to peek at");
+            }
+
+            return this.head.Data;
+
+
+        }
+
+        public T peekatposition(int  pos)
+        {
+            current = this.head;
+            int cont = 0; 
+            while (pos> cont)
+            {
+                current = this.current.Next;
+                cont++;
+            }
+            return this.current.Data;
+        }
+  
         public void AddLast(T item)
         {
             if (head == null)

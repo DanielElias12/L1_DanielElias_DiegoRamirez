@@ -10,10 +10,12 @@ namespace L1_DanielElias_DiegoRamirez.Models.Data
         private readonly static Singleton _instance = new Singleton();
         public List<Player> PlayersList;
         public  Manual_List<Player> playeradder;
+       
         private Singleton()
         {
             PlayersList = new List<Player>();
             playeradder = new Manual_List<Player>();
+          
         }
 
         public static Singleton Instance

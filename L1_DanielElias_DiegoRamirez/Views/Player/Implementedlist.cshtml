@@ -10,6 +10,14 @@
     <a asp-action="ImplementedListManualCreate">Create New</a>
 </p>
 
+<p>
+    <a asp-action="ImplementedReadfile">Import .csv file with players</a>
+</p>
+<p>
+    <a asp-action="Index">Menu</a>
+</p>
+
+
 
 
 
@@ -23,6 +31,7 @@
     </p>Get
 
 </form>
+
 <table class="table">
     <thead>
         <tr>
@@ -69,8 +78,14 @@
                 @Html.DisplayFor(modelItem => item.Club)
             </td>
             <td>
+
+                @Html.ActionLink("Edit player", "ImplementedEdit", new { id= item.Id }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+
                 @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             
+
             </td>
         </tr>
 }
